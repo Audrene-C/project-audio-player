@@ -35,7 +35,7 @@ li {
 }
 
 /* links */
-a, .sideButton {
+a, .sideButton, .roundBtn {
     padding: 1em 1em;
 	color: white;
 	cursor: pointer;
@@ -46,18 +46,18 @@ a, .sideButton {
     transition: all 200ms ease;
 }
 
-a, a:hover, a:active, .sideButton, .sideButton:hover, .sideButton:active {
+a, a:hover, a:active, .sideButton, .sideButton:hover, .sideButton:active, .roundBtn, .roundBtn:hover, .roundBtn:active {
 	text-decoration: none;
     text-shadow: rgba(0,0,0,.01) 0 0 1px;
     transition: all 200ms ease;
 }
 
-a:active, .sideButton:active {
+a:active, .sideButton:active, .roundBtn:active {
 	background: linear-gradient(#00C9A7, #845EC2) padding-box, radial-gradient(farthest-corner, #00C9A7, #845EC2) border-box;
     transition: all 200ms ease;
 }
 
-a:hover, .sideButton:hover {
+a:hover, .sideButton:hover, .roundBtn:hover {
     color: #845EC2;
     transition: all 200ms ease;
 }
@@ -96,7 +96,7 @@ input {
 }
 
 /*player buttons*/
-.control {
+.control, .squareBtn {
 	background: linear-gradient(#000, #000) padding-box, radial-gradient(farthest-corner, #00C9A7, #845EC2) border-box;
 	border: solid 1px transparent;
 	border-radius: 10%;
@@ -116,12 +116,12 @@ input {
     transition: all 200ms ease;
 }
 
-.control:active {
+.control:active, .squareBtn:active {
 	background: linear-gradient(#00C9A7, #845EC2) padding-box, radial-gradient(farthest-corner, #00C9A7, #845EC2) border-box;
     transition: all 200ms ease;
 }
 
-.control:hover {
+.control:hover, .squareBtn:hover {
     color: #845EC2;
     transition: all 200ms ease;
 }
@@ -271,12 +271,13 @@ button:hover {
 }
 
 .displayList {
-    background-color:rgba(0, 0, 0, 0.7);
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    background-color:rgba(0, 0, 0, 0.6);
+    border-top: 1px groove;
+    border-bottom: 1px groove;
     border-image-source: linear-gradient(45deg, #5a80b9, #845EC2);
     border-image-slice: 1;
     padding: 0.3vw 0.5vw 0.3vw 0.5vw;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.7);
 }
 
 /* search results */
@@ -287,4 +288,17 @@ button:hover {
 .list-inline-item:hover {
     cursor: pointer;
     color: #845EC2;
+}
+
+.squareBtn {
+    border-radius: 0px;
+}
+
+.cardText {
+    background-color:rgba(0, 0, 0, 0.6);
+    border-top: 2px groove;
+    border-bottom: 2px groove;
+    border-image-source: linear-gradient(45deg, #5a80b9, #845EC2);
+    border-image-slice: 1;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.7);
 }

@@ -493,12 +493,47 @@ function displayPartial(partial) {
     document.querySelector('#content').innerHTML = partial;
 }
 
+/* Intercept comment form and post it to PHP with song data for process */
+async function commentProcess() {
+    let commentForm = document.querySelector('#commentForm');
+    let commentInput = document.querySelector('#commentInput');
+    commentForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+        let commentText = commentInput.value;
+        let formData = new FormData();
+        formData.append('songId', songId);
+        formData.append('comment', commentText);
+        formData.append('artist', songArtistName);
+        formData.append('title', songTitle);
+        await fetch('./apps/comment-process.php', {
+            method: 'POST',
+            body: formData
+        })
+        refreshDisplay();
+    })
+}
+
+/* Send request to PHP to get all song's comments */
+async function commentsDisplay() {
+    let commentsDiv = document.querySelector('#commentsDiv');
+    let formData = new FormData();
+    formData.append('songId', songId);
+    formData.append('title', songTitle);
+    let commentsResponse = await fetch('./apps/get-comments.php', {
+        method: 'POST',
+        body: formData
+    })
+    let commentsContent = await commentsResponse.text();
+    console.log(commentsContent)
+    commentsDiv.innerHTML = commentsContent;
+}
+
 /* Listen for click on tabs and store the targeted tab  */
 async function listenTab() {
     /* Display "Now playing" by default */
-    if (!currentTab) {
-        currentTab = 'Now playing';
-    }
+    // if (!currentTab) {
+    //     currentTab = 'Now playing';
+    // }
     tabs.forEach(tab => {
         tab.addEventListener('click', function(event) {
             if (event.target.innerHTML === 'Now playing') {
@@ -539,9 +574,12 @@ async function refreshTabDisplay() {
         
     } else if (currentTab === 'Comments') {
         if (songId) {
-            /* Display song's title/artist/cover and album's tracklist */
+            /* Display comments list and process comment post */
             let partial = await getPartial('./partials/comments.php');
             displayPartial(partial);
+            await commentsDisplay();
+            commentProcess();
+            
         } else {
             let partial = await getPartial('./partials/comments-default.php');
             displayPartial(partial);
@@ -580,6 +618,7 @@ player.addEventListener('playing', async function() {
 })
 
 /* Refresh all display once on page loading*/
+
 refreshDisplay();
 
 /* --------------------------- Playing & refresh systems end --------------------------- */
