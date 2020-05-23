@@ -458,10 +458,8 @@ function clickSong() {
         albumSong.addEventListener('click', async function() {
             songId = albumSong.dataset.id;
             songLink = albumSong.dataset.link;
-            console.log(songId)
             let albumId = await makeSongRequest(songId);
             await makeAlbumRequest(albumId); 
-            console.log(songId)
             setSong(songLink);
             refreshDisplay();
         })
@@ -618,7 +616,6 @@ player.addEventListener('playing', async function() {
 })
 
 /* Refresh all display once on page loading*/
-
 refreshDisplay();
 
 /* --------------------------- Playing & refresh systems end --------------------------- */
